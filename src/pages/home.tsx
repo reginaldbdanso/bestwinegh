@@ -19,7 +19,7 @@ export default function HomePage() {
             <Button size="lg" className="bg-primary hover:bg-primary/90" asChild>
               <Link to="/wines">Shop Collection</Link>
             </Button>
-            <Button size="lg" variant="outline" className="text-white border-white hover:bg-white/10" asChild>
+            <Button size="lg" variant="outline" className="text-red-500 border-white hover:bg-white/10" asChild>
               <Link to="/about">Learn More</Link>
             </Button>
           </div>

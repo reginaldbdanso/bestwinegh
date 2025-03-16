@@ -1,5 +1,5 @@
 import { Link } from "react-router-dom"
-import { Wine, Mail, Phone, MapPin, Facebook, Instagram, Twitter } from "lucide-react"
+import { Mail, Phone, MapPin, Facebook, Instagram, Twitter } from "lucide-react"
 import { Button } from "./ui/button"
 import logoImage from "../assets/logo.png"
 
