@@ -19,7 +19,7 @@ const wines: Wine[] = [
       size: "750ml",
       closure: "Cork",
     },
-    image: "https://placehold.co/600x800",
+    image: "https://images.unsplash.com/photo-1423483641154-5411ec9c0ddf?w=800&h=1200&fit=crop&q=80",
   },
   {
     id: "2",
@@ -38,7 +38,7 @@ const wines: Wine[] = [
       size: "750ml",
       closure: "Screw Cap",
     },
-    image: "https://placehold.co/600x800",
+    image: "https://images.unsplash.com/photo-1474722883778-792e7990302f?w=800&h=1200&fit=crop&q=80",
   },
   {
     id: "3",
@@ -57,7 +57,7 @@ const wines: Wine[] = [
       size: "750ml",
       closure: "Cork",
     },
-    image: "https://placehold.co/600x800",
+    image: "https://images.unsplash.com/photo-1592489637182-8c172d6d7826?w=800&h=1200&fit=crop&q=80",
   },
   {
     id: "4",
@@ -76,7 +76,7 @@ const wines: Wine[] = [
       size: "750ml",
       closure: "Cork",
     },
-    image: "https://placehold.co/600x800",
+    image: "https://images.unsplash.com/photo-1588982739125-eced75939c56?w=800&h=1200&fit=crop&q=80",
   },
   {
     id: "5",
@@ -95,7 +95,7 @@ const wines: Wine[] = [
       size: "750ml",
       closure: "Cork",
     },
-    image: "https://placehold.co/600x800",
+    image: "https://images.unsplash.com/photo-1510812431401-41d2bd2722f3?w=800&h=1200&fit=crop&q=80",
   },
   {
     id: "6",
@@ -114,7 +114,7 @@ const wines: Wine[] = [
       size: "750ml",
       closure: "Cork",
     },
-    image: "https://placehold.co/600x800",
+    image: "https://images.unsplash.com/photo-1585553616435-2dc0a54e271d?w=800&h=1200&fit=crop&q=80",
   },
   {
     id: "7",
@@ -133,7 +133,7 @@ const wines: Wine[] = [
       size: "750ml",
       closure: "Cork",
     },
-    image: "https://placehold.co/600x800",
+    image: "https://images.unsplash.com/photo-1566275529824-cca6d008f3da?w=800&h=1200&fit=crop&q=80",
   },
   {
     id: "8",
@@ -152,7 +152,7 @@ const wines: Wine[] = [
       size: "750ml",
       closure: "Cork",
     },
-    image: "https://placehold.co/600x800",
+    image: "https://images.unsplash.com/photo-1584916201218-f4242ceb4809?w=800&h=1200&fit=crop&q=80",
   },
 ]
 
@@ -168,4 +168,3 @@ export const getWinesByCategory = (category: string): Wine[] => {
   if (category === "all") return wines
   return wines.filter((wine) => wine.category.toLowerCase().replace(" ", "-") === category)
 }
-

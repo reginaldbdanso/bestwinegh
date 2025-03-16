@@ -1,13 +1,12 @@
-"use client"
-
 import { useState } from "react"
 import { Link, useLocation } from "react-router-dom"
-import { Wine, ShoppingCart, Search, Menu, X, User } from "lucide-react"
+import { ShoppingCart, Search, Menu, X, User } from "lucide-react"
 import { Button } from "./ui/button"
 import { Input } from "./ui/input"
 import { Sheet, SheetContent, SheetTrigger } from "./ui/sheet"
 import { Badge } from "./ui/badge"
 import { useMobile } from "../hooks/use-mobile"
+import logoImage from "../assets/logo.png"
 
 export default function Header() {
   const isMobile = useMobile()
@@ -62,8 +61,14 @@ export default function Header() {
             )}
 
             <Link to="/" className="flex items-center gap-2">
-              <Wine className="h-6 w-6" />
-              <span className="font-bold text-xl">Vineyard Selections</span>
+              <img 
+                src={logoImage} 
+                alt="Bestwinesgh Logo - Premium Wine Shop" 
+                className="h-10 w-auto object-contain"
+                width={40}
+                height={40}
+              />
+              <span className="font-bold text-xl text-primary">Bestwinesgh</span>
             </Link>
           </div>
 
@@ -131,4 +136,3 @@ export default function Header() {
     </header>
   )
 }
-

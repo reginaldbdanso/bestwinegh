@@ -1,3 +1,4 @@
+import { Link } from "react-router-dom"
 import { Button } from "../components/ui/button"
 import FeaturedWines from "../components/featured-wines"
 import WineCategories from "../components/wine-categories"
@@ -7,7 +8,7 @@ export default function HomePage() {
   return (
     <div className="flex flex-col">
       {/* Hero Section */}
-      <section className="relative h-[70vh] bg-[url('https://placehold.co/1920x1080')] bg-cover bg-center">
+      <section className="relative h-[70vh] bg-[url('https://images.unsplash.com/photo-1506377247377-2a5b3b417ebb?auto=format&fit=crop&q=80')] bg-cover bg-center">
         <div className="absolute inset-0 bg-black/40" />
         <div className="relative z-10 container mx-auto px-4 h-full flex flex-col justify-center items-start">
           <h1 className="text-4xl md:text-6xl font-bold text-white mb-4">Discover Exceptional Wines</h1>
@@ -15,11 +16,11 @@ export default function HomePage() {
             Curated selection of fine wines from around the world, delivered to your doorstep.
           </p>
           <div className="flex flex-col sm:flex-row gap-4">
-            <Button size="lg" className="bg-primary hover:bg-primary/90">
-              Shop Collection
+            <Button size="lg" className="bg-primary hover:bg-primary/90" asChild>
+              <Link to="/wines">Shop Collection</Link>
             </Button>
-            <Button size="lg" variant="outline" className="text-white border-white hover:bg-white/10">
-              Learn More
+            <Button size="lg" variant="outline" className="text-white border-white hover:bg-white/10" asChild>
+              <Link to="/about">Learn More</Link>
             </Button>
           </div>
         </div>
@@ -50,4 +51,3 @@ export default function HomePage() {
     </div>
   )
 }
-
