@@ -8,13 +8,13 @@ const slides = [
   {
     title: "Red Wine",
     description: "Bold and sophisticated reds from world-renowned vineyards",
-    image: "https://images.unsplash.com/photo-1506377247377-2a5b3b417ebb?auto=format&fit=crop&q=80",
+    image: "https://images.unsplash.com/photo-1510812431401-41d2bd2722f3?auto=format&fit=crop&q=80",
     link: "/wines?category=red"
   },
   {
     title: "White Wine",
     description: "Crisp and refreshing whites for every occasion",
-    image: "https://images.unsplash.com/photo-1569919659476-f0852f6834b7?auto=format&fit=crop&q=80",
+    image: "https://images.unsplash.com/photo-1558001373-7b93ee48ffa0?auto=format&fit=crop&q=80",
     link: "/wines?category=white"
   },
   {
@@ -26,7 +26,7 @@ const slides = [
   {
     title: "Rosé Wine",
     description: "Elegant and versatile rosés for the perfect summer day",
-    image: "https://images.unsplash.com/photo-1588982690991-d7c59e952cd5?auto=format&fit=crop&q=80",
+    image: "https://images.unsplash.com/photo-1558346489-19413928158b?auto=format&fit=crop&q=80",
     link: "/wines?category=rose"
   }
 ]

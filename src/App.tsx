@@ -13,11 +13,13 @@ import TermsPage from "./pages/terms"
 import FAQPage from "./pages/faq"
 import NotFoundPage from "./pages/not-found"
 import { CartProvider } from "./contexts/cart-context"
+import { Toaster } from 'sonner'
 
 function App() {
   return (
     <CartProvider>
       <div className="flex flex-col min-h-screen">
+        <Toaster />
         <Header />
         <main className="flex-1">
           <Routes>
