@@ -7,6 +7,7 @@ import { Sheet, SheetContent, SheetTrigger } from "./ui/sheet"
 import { Badge } from "./ui/badge"
 import { useMobile } from "../hooks/use-mobile"
 import logoImage from "../assets/logo.png"
+import { useCart } from "../contexts/cart-context"
 
 export default function Header() {
   const isMobile = useMobile()
@@ -15,6 +16,8 @@ export default function Header() {
 
   // Active link helper
   const isActive = (path: string) => location.pathname === path
+
+  const { itemCount } = useCart()
 
   return (
     <header className="sticky top-0 z-50 w-full border-b bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60">
@@ -124,7 +127,11 @@ export default function Header() {
                 <Button variant="ghost" size="icon" className="relative" asChild>
                   <Link to="/cart">
                     <ShoppingCart className="h-5 w-5" />
-                    <Badge className="absolute -top-1 -right-1 h-5 w-5 flex items-center justify-center p-0">3</Badge>
+                    {itemCount > 0 && (
+                      <Badge className="absolute -top-1 -right-1 h-5 w-5 flex items-center justify-center p-0">
+                        {itemCount}
+                      </Badge>
+                    )}
                     <span className="sr-only">Cart</span>
                   </Link>
                 </Button>

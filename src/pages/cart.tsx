@@ -1,11 +1,12 @@
 "use client"
 
-import { useState } from "react"
+import { useEffect } from "react"
 import { Link } from "react-router-dom"
 import { Minus, Plus, ShoppingCart, Trash2 } from "lucide-react"
 import { Button } from "../components/ui/button"
 import { Separator } from "../components/ui/separator"
 import { Input } from "../components/ui/input"
+import { useCart } from "../contexts/cart-context"
 
 // Mock cart data - in a real app, this would come from a state management solution
 const initialCartItems = [
@@ -28,16 +29,24 @@ const initialCartItems = [
 ]
 
 export default function CartPage() {
-  const [cartItems, setCartItems] = useState(initialCartItems)
+  // Initialize cart with sample data
+  const { items: cartItems, setItems: setCartItems } = useCart()
+
+  useEffect(() => {
+    if (cartItems.length === 0) {
+      setCartItems(initialCartItems)
+    }
+  }, [])
 
   const updateQuantity = (id: number, newQuantity: number) => {
     if (newQuantity < 1) return
-
-    setCartItems((items) => items.map((item) => (item.id === id ? { ...item, quantity: newQuantity } : item)))
+    setCartItems(items => items.map(item => 
+      item.id === id ? { ...item, quantity: newQuantity } : item
+    ))
   }
 
   const removeItem = (id: number) => {
-    setCartItems((items) => items.filter((item) => item.id !== id))
+    setCartItems(items => items.filter(item => item.id !== id))
   }
 
   const subtotal = cartItems.reduce((sum, item) => sum + item.price * item.quantity, 0)

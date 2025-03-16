@@ -11,7 +11,7 @@ const categories = [
     id: "white",
     name: "White Wines",
     description: "Crisp, refreshing varieties for any occasion",
-    image: "https://images.unsplash.com/photo-1566275529824-cca6d008f3da?auto=format&fit=crop&q=80",
+    image: "https://images.unsplash.com/photo-1508253730651-e5ace80a7025?auto=format&fit=crop&q=80",
   },
   {
     id: "sparkling",
