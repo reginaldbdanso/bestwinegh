@@ -6,7 +6,7 @@ import { Input } from "./ui/input"
 import { Sheet, SheetContent, SheetTrigger } from "./ui/sheet"
 import { Badge } from "./ui/badge"
 import { useMobile } from "../hooks/use-mobile"
-import logoImage from "../assets/logo.png"
+import logoImage from "/src/assets/logo.png"
 
 export default function Header() {
   const isMobile = useMobile()

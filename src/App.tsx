@@ -5,8 +5,13 @@ import HomePage from "./pages/home"
 import WineDetailPage from "./pages/wine-detail"
 import CartPage from "./pages/cart"
 import WinesPage from "./pages/wines"
+import AboutPage from "./pages/about"
+import ContactPage from "./pages/contact"
+import DeliveryPage from "./pages/delivery"
+import PrivacyPage from "./pages/privacy"
+import TermsPage from "./pages/terms"
+import FAQPage from "./pages/faq"
 import NotFoundPage from "./pages/not-found"
-import TestPage from "./pages/test"
 
 function App() {
   return (
@@ -18,7 +23,12 @@ function App() {
           <Route path="/wines" element={<WinesPage />} />
           <Route path="/wines/:id" element={<WineDetailPage />} />
           <Route path="/cart" element={<CartPage />} />
-          <Route path="/test" element={<TestPage />} />
+          <Route path="/about" element={<AboutPage />} />
+          <Route path="/contact" element={<ContactPage />} />
+          <Route path="/delivery" element={<DeliveryPage />} />
+          <Route path="/privacy" element={<PrivacyPage />} />
+          <Route path="/terms" element={<TermsPage />} />
+          <Route path="/faq" element={<FAQPage />} />
           <Route path="*" element={<NotFoundPage />} />
         </Routes>
       </main>
@@ -28,4 +38,3 @@ function App() {
 }
 
 export default App
-
