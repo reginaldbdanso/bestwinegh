@@ -1,57 +1,28 @@
-"use client"
-
-import { useEffect } from "react"
 import { Link } from "react-router-dom"
 import { Minus, Plus, ShoppingCart, Trash2 } from "lucide-react"
 import { Button } from "../components/ui/button"
 import { Separator } from "../components/ui/separator"
 import { Input } from "../components/ui/input"
 import { useCart } from "../contexts/cart-context"
-
-// Mock cart data - in a real app, this would come from a state management solution
-const initialCartItems = [
-  {
-    id: 1,
-    name: "Château Margaux 2018",
-    category: "Red Wine",
-    price: 599.99,
-    quantity: 1,
-    image: "https://placehold.co/300x400",
-  },
-  {
-    id: 2,
-    name: "Cloudy Bay Sauvignon Blanc",
-    category: "White Wine",
-    price: 34.99,
-    quantity: 2,
-    image: "https://placehold.co/300x400",
-  },
-]
+import { convertToGHS, formatGHSPrice, formatUSDPrice } from "../lib/currency"
 
 export default function CartPage() {
-  // Initialize cart with sample data
-  const { items: cartItems, setItems: setCartItems } = useCart()
+  const { state, updateQuantity, removeFromCart } = useCart()
+  const { items: cartItems } = state
 
-  useEffect(() => {
-    if (cartItems.length === 0) {
-      setCartItems(initialCartItems)
-    }
-  }, [])
-
-  const updateQuantity = (id: number, newQuantity: number) => {
+  const handleUpdateQuantity = (id: string, newQuantity: number) => {
     if (newQuantity < 1) return
-    setCartItems(items => items.map(item => 
-      item.id === id ? { ...item, quantity: newQuantity } : item
-    ))
+    updateQuantity(id, newQuantity)
   }
 
-  const removeItem = (id: number) => {
-    setCartItems(items => items.filter(item => item.id !== id))
+  const handleRemoveItem = (id: string) => {
+    removeFromCart(id)
   }
 
-  const subtotal = cartItems.reduce((sum, item) => sum + item.price * item.quantity, 0)
-  const shipping = subtotal > 150 ? 0 : 15
-  const total = subtotal + shipping
+  const subtotalUSD = cartItems.reduce((sum, item) => sum + item.price * item.quantity, 0)
+  const subtotalGHS = convertToGHS(subtotalUSD)
+  const shipping = subtotalGHS > 2000 ? 0 : 200 // Free shipping over GH₵ 2000
+  const total = subtotalGHS + shipping
 
   return (
     <div className="container mx-auto px-4 py-8">
@@ -92,7 +63,10 @@ export default function CartPage() {
                       <div className="flex-1">
                         <h3 className="font-medium">{item.name}</h3>
                         <p className="text-sm text-muted-foreground">{item.category}</p>
-                        <div className="font-bold mt-1">${item.price.toFixed(2)}</div>
+                        <div className="space-y-1 mt-1">
+                          <div className="font-bold">{formatGHSPrice(convertToGHS(item.price))}</div>
+                          <div className="text-sm text-muted-foreground">{formatUSDPrice(item.price)}</div>
+                        </div>
                       </div>
 
                       <div className="flex items-center gap-2">
@@ -100,7 +74,7 @@ export default function CartPage() {
                           variant="outline"
                           size="icon"
                           className="h-8 w-8"
-                          onClick={() => updateQuantity(item.id, item.quantity - 1)}
+                          onClick={() => handleUpdateQuantity(item.id, item.quantity - 1)}
                         >
                           <Minus className="h-4 w-4" />
                         </Button>
@@ -109,19 +83,22 @@ export default function CartPage() {
                           variant="outline"
                           size="icon"
                           className="h-8 w-8"
-                          onClick={() => updateQuantity(item.id, item.quantity + 1)}
+                          onClick={() => handleUpdateQuantity(item.id, item.quantity + 1)}
                         >
                           <Plus className="h-4 w-4" />
                         </Button>
                       </div>
 
-                      <div className="text-right font-bold">${(item.price * item.quantity).toFixed(2)}</div>
+                      <div className="text-right">
+                        <div className="font-bold">{formatGHSPrice(convertToGHS(item.price * item.quantity))}</div>
+                        <div className="text-sm text-muted-foreground">{formatUSDPrice(item.price * item.quantity)}</div>
+                      </div>
 
                       <Button
                         variant="ghost"
                         size="icon"
                         className="h-8 w-8 text-muted-foreground hover:text-destructive"
-                        onClick={() => removeItem(item.id)}
+                        onClick={() => handleRemoveItem(item.id)}
                       >
                         <Trash2 className="h-4 w-4" />
                       </Button>
@@ -140,16 +117,22 @@ export default function CartPage() {
                 <div className="space-y-3">
                   <div className="flex justify-between">
                     <span className="text-muted-foreground">Subtotal</span>
-                    <span>${subtotal.toFixed(2)}</span>
+                    <div>
+                      <div>{formatGHSPrice(subtotalGHS)}</div>
+                      <div className="text-sm text-muted-foreground">{formatUSDPrice(subtotalUSD)}</div>
+                    </div>
                   </div>
                   <div className="flex justify-between">
                     <span className="text-muted-foreground">Shipping</span>
-                    <span>{shipping === 0 ? "Free" : `$${shipping.toFixed(2)}`}</span>
+                    <span>{shipping === 0 ? "Free" : formatGHSPrice(shipping)}</span>
                   </div>
                   <Separator />
                   <div className="flex justify-between font-bold text-lg">
                     <span>Total</span>
-                    <span>${total.toFixed(2)}</span>
+                    <div>
+                      <div>{formatGHSPrice(total)}</div>
+                      <div className="text-sm text-muted-foreground">{formatUSDPrice(total / convertToGHS(1))}</div>
+                    </div>
                   </div>
                 </div>
 
@@ -166,8 +149,8 @@ export default function CartPage() {
             </div>
 
             <div className="mt-4 text-sm text-muted-foreground">
-              <p>Free shipping on orders over $150</p>
-              <p>Need help? Call us at (555) 123-4567</p>
+              <p>Free shipping on orders over GH₵ 2,000</p>
+              <p>Need help? Call us at (233) 123-4567</p>
             </div>
           </div>
         </div>
@@ -175,4 +158,3 @@ export default function CartPage() {
     </div>
   )
 }
-

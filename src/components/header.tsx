@@ -13,11 +13,10 @@ export default function Header() {
   const isMobile = useMobile()
   const [isSearchOpen, setIsSearchOpen] = useState(false)
   const location = useLocation()
+  const { state: cartState } = useCart()
 
   // Active link helper
   const isActive = (path: string) => location.pathname === path
-
-  const { itemCount } = useCart()
 
   return (
     <header className="sticky top-0 z-50 w-full border-b bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60">
@@ -127,12 +126,15 @@ export default function Header() {
                 <Button variant="ghost" size="icon" className="relative" asChild>
                   <Link to="/cart">
                     <ShoppingCart className="h-5 w-5" />
-                    {itemCount > 0 && (
-                      <Badge className="absolute -top-1 -right-1 h-5 w-5 flex items-center justify-center p-0">
-                        {itemCount}
+                    {cartState.itemCount > 0 && (
+                      <Badge 
+                        variant="default" 
+                        className="absolute -top-2 -right-2 h-5 w-5 flex items-center justify-center p-0 text-xs font-bold"
+                      >
+                        {cartState.itemCount}
                       </Badge>
                     )}
-                    <span className="sr-only">Cart</span>
+                    <span className="sr-only">Cart ({cartState.itemCount} items)</span>
                   </Link>
                 </Button>
               </>
