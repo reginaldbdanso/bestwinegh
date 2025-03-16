@@ -19,7 +19,7 @@ const wines: Wine[] = [
       size: "750ml",
       closure: "Cork",
     },
-    image: "https://images.unsplash.com/photo-1423483641154-5411ec9c0ddf?w=800&h=1200&fit=crop&q=80",
+    image: "https://images.unsplash.com/photo-1585553616435-2dc0a54e271d?w=800&h=1200&fit=crop&q=80",
   },
   {
     id: "2",
@@ -57,7 +57,7 @@ const wines: Wine[] = [
       size: "750ml",
       closure: "Cork",
     },
-    image: "https://images.unsplash.com/photo-1592489637182-8c172d6d7826?w=800&h=1200&fit=crop&q=80",
+    image: "https://images.unsplash.com/photo-1558001373-7b93ee48ffa0?w=800&h=1200&fit=crop&q=80",
   },
   {
     id: "4",
@@ -76,7 +76,7 @@ const wines: Wine[] = [
       size: "750ml",
       closure: "Cork",
     },
-    image: "https://images.unsplash.com/photo-1588982739125-eced75939c56?w=800&h=1200&fit=crop&q=80",
+    image: "https://images.unsplash.com/photo-1547595628-c61a29f496f0?w=800&h=1200&fit=crop&q=80",
   },
   {
     id: "5",

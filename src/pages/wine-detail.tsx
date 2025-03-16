@@ -1,23 +1,25 @@
-"use client"
-
 import { useParams, Link, useNavigate } from "react-router-dom"
-import { ChevronRight, Star, Truck, ShieldCheck, ArrowLeft, ShoppingCart } from "lucide-react"
+import { ChevronRight, Star, Truck, ShieldCheck, ArrowLeft, ShoppingCart, Plus, Minus } from "lucide-react"
 import { Button } from "../components/ui/button"
 import { Separator } from "../components/ui/separator"
-import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "../components/ui/select"
+// import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "../components/ui/select"
 import { useEffect, useState } from "react"
 import type { Wine } from "../types"
 import { getWineById } from "../api/wines"
+import { useCart } from "../contexts/cart-context"
+import { useToast } from "../hooks/use-toast"
+import { convertToGHS, formatGHSPrice, formatUSDPrice } from "../lib/currency"
 
 export default function WineDetailPage() {
   const { id } = useParams<{ id: string }>()
   const navigate = useNavigate()
   const [wine, setWine] = useState<Wine | null>(null)
   const [loading, setLoading] = useState(true)
+  const { state, addToCart, updateQuantity } = useCart()
+  const { toast } = useToast()
 
   useEffect(() => {
     if (id) {
-      // In a real app, this would be an API call
       const fetchedWine = getWineById(id)
       if (fetchedWine) {
         setWine(fetchedWine)
@@ -27,6 +29,24 @@ export default function WineDetailPage() {
       setLoading(false)
     }
   }, [id, navigate])
+
+  const cartItem = wine ? state.items.find(item => item.id === wine.id) : null
+
+  const handleAddToCart = () => {
+    if (wine) {
+      addToCart(wine)
+      toast({
+        title: "Added to cart",
+        description: `${wine.name} has been added to your cart`
+      })
+    }
+  }
+
+  const handleUpdateQuantity = (newQuantity: number) => {
+    if (wine && newQuantity >= 1) {
+      updateQuantity(wine.id, newQuantity)
+    }
+  }
 
   if (loading) {
     return <div className="container mx-auto px-4 py-8">Loading...</div>
@@ -89,38 +109,41 @@ export default function WineDetailPage() {
             <span className="text-muted-foreground">{wine.region}</span>
           </div>
 
-          <div className="text-3xl font-bold mb-6">${wine.price.toFixed(2)}</div>
+          <div className="space-y-1 mb-6">
+            <div className="text-3xl font-bold">{formatGHSPrice(convertToGHS(wine.price))}</div>
+            <div className="text-lg text-muted-foreground">{formatUSDPrice(wine.price)}</div>
+          </div>
 
           <div className="space-y-6 mb-8">
-            <div>
-              <label htmlFor="quantity" className="block text-sm font-medium mb-2">
-                Quantity
-              </label>
-              <div className="flex gap-4">
-                <Select defaultValue="1">
-                  <SelectTrigger className="w-24">
-                    <SelectValue placeholder="Qty" />
-                  </SelectTrigger>
-                  <SelectContent>
-                    {[1, 2, 3, 4, 5, 6, 12].map((qty) => (
-                      <SelectItem key={qty} value={qty.toString()}>
-                        {qty}
-                      </SelectItem>
-                    ))}
-                  </SelectContent>
-                </Select>
-
-                <Button className="flex-1 gap-2">
-                  <ShoppingCart className="h-5 w-5" />
-                  Add to Cart
+            {cartItem ? (
+              <div className="flex items-center gap-4">
+                <Button
+                  variant="outline"
+                  size="icon"
+                  onClick={() => handleUpdateQuantity(cartItem.quantity - 1)}
+                >
+                  <Minus className="h-4 w-4" />
+                </Button>
+                <span className="text-xl font-medium w-12 text-center">{cartItem.quantity}</span>
+                <Button
+                  variant="outline"
+                  size="icon"
+                  onClick={() => handleUpdateQuantity(cartItem.quantity + 1)}
+                >
+                  <Plus className="h-4 w-4" />
                 </Button>
               </div>
-            </div>
+            ) : (
+              <Button className="w-full gap-2" onClick={handleAddToCart}>
+                <ShoppingCart className="h-5 w-5" />
+                Add to Cart
+              </Button>
+            )}
 
             <div className="flex flex-col gap-3 text-sm">
               <div className="flex items-center gap-2">
                 <Truck className="h-5 w-5 text-muted-foreground" />
-                <span>Free shipping on orders over $150</span>
+                <span>Free shipping on orders over GH₵ 2,000</span>
               </div>
               <div className="flex items-center gap-2">
                 <ShieldCheck className="h-5 w-5 text-muted-foreground" />
@@ -154,4 +177,3 @@ export default function WineDetailPage() {
     </div>
   )
 }
-
