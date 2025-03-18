@@ -31,7 +31,7 @@ export default function WineCard({ wine }: WineCardProps) {
   }
 
   return (
-    <Card className="overflow-hidden transition-all hover:shadow-md">
+    <Card className="flex flex-col h-full">
       <Link to={`/wines/${wine.id}`}>
         <div className="aspect-[3/4] relative overflow-hidden bg-muted">
           <img
@@ -41,10 +41,10 @@ export default function WineCard({ wine }: WineCardProps) {
           />
         </div>
       </Link>
-      <CardContent className="p-4">
+      <CardContent className="p-4 flex-grow">
         <div className="text-sm text-muted-foreground mb-1">{wine.category}</div>
         <Link to={`/wines/${wine.id}`} className="hover:underline">
-          <h3 className="font-medium text-lg mb-1">{wine.name}</h3>
+          <h3 className="font-medium text-lg mb-1 line-clamp-2">{wine.name}</h3>
         </Link>
         <div className="text-sm text-muted-foreground mb-2">{wine.region}</div>
         <div className="space-y-1">
@@ -52,7 +52,7 @@ export default function WineCard({ wine }: WineCardProps) {
           <div className="text-sm text-muted-foreground">{formatUSDPrice(wine.price)}</div>
         </div>
       </CardContent>
-      <CardFooter className="p-4 pt-0">
+      <CardFooter className="p-4 pt-0 mt-auto">
         {cartItem ? (
           <div className="flex items-center gap-2 w-full">
             <Button

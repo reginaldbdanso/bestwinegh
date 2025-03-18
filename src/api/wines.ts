@@ -1,44 +1,46 @@
 import type { Wine } from "../types"
+import nederbergImage from "../assets/nederberg.jpg"
+import asconiAgorImage from "../assets/asconiagor.jpg"
 
 // Mock wine data - in a real app, this would come from an API
 const wines: Wine[] = [
   {
     id: "1",
-    name: "Château Margaux 2018",
+    name: "Nederburg Cabernet Sauvignon 2018",
     category: "Red Wine",
-    region: "Bordeaux, France",
-    price: 599.99,
-    rating: 4.9,
-    reviews: 124,
+    region: "South Africa",
+    price: 299.99,
+    rating: 4.7,
+    reviews: 92,
     description:
-      "A prestigious First Growth Bordeaux with exceptional depth and complexity. This vintage showcases rich blackcurrant and plum flavors, complemented by notes of violet, tobacco, and cedar. The palate is full-bodied with refined tannins and a remarkably long, elegant finish.",
+      "A premium Cabernet Sauvignon from Nederburg's distinguished cellars. This wine showcases rich blackcurrant and cassis flavors with hints of cedar and vanilla. Full-bodied with well-integrated tannins and a long, elegant finish that exemplifies South African winemaking excellence.",
     details: {
       vintage: "2018",
-      varietal: "Cabernet Sauvignon, Merlot, Petit Verdot, Cabernet Franc",
+      varietal: "Cabernet Sauvignon",
+      alcohol: "14%",
+      size: "750ml",
+      closure: "Cork",
+    },
+    image: nederbergImage,
+  },
+  {
+    id: "2",
+    name: "Asconi Agor Red Blend",
+    category: "Red Wine",
+    region: "Moldova",
+    price: 249.99,
+    rating: 4.6,
+    reviews: 78,
+    description:
+      "A distinctive red blend from Moldova's renowned Asconi winery. This unique wine presents complex aromas of dark fruits, spices, and subtle oak notes. The palate offers layers of blackberry, plum, and Mediterranean herbs, wrapped in a luxurious presentation that reflects its premium quality.",
+    details: {
+      vintage: "2020",
+      varietal: "Red Blend",
       alcohol: "13.5%",
       size: "750ml",
       closure: "Cork",
     },
-    image: "https://images.unsplash.com/photo-1585553616435-2dc0a54e271d?w=800&h=1200&fit=crop&q=80",
-  },
-  {
-    id: "2",
-    name: "Cloudy Bay Sauvignon Blanc",
-    category: "White Wine",
-    region: "Marlborough, New Zealand",
-    price: 34.99,
-    rating: 4.7,
-    reviews: 89,
-    description:
-      "A vibrant and expressive Sauvignon Blanc that has become a benchmark for the Marlborough region. Intense aromas of ripe tropical fruits, citrus, and fresh herbs lead to a palate that is both crisp and complex with excellent acidity and a long, refreshing finish.",
-    details: {
-      vintage: "2022",
-      varietal: "Sauvignon Blanc",
-      alcohol: "13%",
-      size: "750ml",
-      closure: "Screw Cap",
-    },
-    image: "https://images.unsplash.com/photo-1474722883778-792e7990302f?w=800&h=1200&fit=crop&q=80",
+    image: asconiAgorImage,
   },
   {
     id: "3",
@@ -133,7 +135,7 @@ const wines: Wine[] = [
       size: "750ml",
       closure: "Cork",
     },
-    image: "https://images.unsplash.com/photo-1566275529824-cca6d008f3da?w=800&h=1200&fit=crop&q=80",
+    image: "https://images.unsplash.com/photo-1584916201218-f4242ceb4809?w=800&h=1200&fit=crop&q=80",
   },
   {
     id: "8",
