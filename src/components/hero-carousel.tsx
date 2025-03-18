@@ -87,13 +87,13 @@ export default function HeroCarousel() {
             >
               <div className="absolute inset-0 bg-black/40" />
               <div className="relative z-10 container mx-auto px-4 h-full flex flex-col justify-center items-start">
-                <h1 className="text-4xl md:text-6xl font-bold text-white mb-4 animate-fade-in">
+                <h1 className="text-4xl md:text-6xl font-bold text-white mb-4 animate-fade-in ml-10">
                   {slide.title}
                 </h1>
-                <p className="text-xl text-white/90 max-w-xl mb-8 animate-fade-in">
+                <p className="text-xl text-white/90 max-w-xl mb-8 animate-fade-in ml-10">
                   {slide.description}
                 </p>
-                <div className="flex flex-col sm:flex-row gap-4">
+                <div className="flex flex-col sm:flex-row gap-4 ml-10">
                   <Button 
                     size="lg" 
                     className="bg-primary hover:bg-primary/90 transition-all duration-300" 
